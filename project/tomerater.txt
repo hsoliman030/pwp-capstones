@@ -1,0 +1,135 @@
+class User(object):
+    def __init__(self, name, email):
+        self.name=name
+        self.email=email
+        self.books={}
+
+    def get_email(self):
+        return self.email
+
+    def change_email(self, address):
+        self.address=address
+        self.email=self.address
+        return "{name}'s email has been changed ".format(name=self.name)
+
+
+    def __repr__(self):
+        num_books=len(self.books)
+        return "user {name}, email: {email}, books read: {number}".format(name=self.name,email=self.email,number=num_books)
+
+    def __eq__(self, other_user):
+        pass
+    def read_book(self,book,rating=None):
+        self.book=book
+        self.books[self.book]=rating
+    def get_average_rating(self):
+        counter=0
+        val=0
+        for i in self.books.values():
+            counter+=1
+            val+=i
+        return val/counter
+
+
+
+class Book:
+    def __init__(self,title,isbn):
+        self.title=title
+        self.isbn=isbn
+        self.rating=[]
+
+    def get_title(self):
+        return self.title
+    def get_isbn(self):
+        return self.isbn
+    def set_isbn(self,new_isbn):
+        self.isbn=new_isbn
+        return 'this books isbn has been updated'
+    def add_rating(self,rating):
+        pass
+    def __eq__(self):
+        pass
+    def get_average_rating(self):
+        counter_2=0
+        val_2=0
+        for i in self.rating:
+            counter_2+=1
+            val_2+=i
+        return val_2/counter_2
+
+    def __hash__(self):
+        return hash((self.title, self.isbn))
+
+class Fiction(Book):
+    def __init__(self,title,author,isbn):
+
+        self.title=title
+        self.author=author
+        self.isbn=isbn
+    def get_author(self):
+        return self.author
+    def __repr__(self):
+        return "{title} by {author}".format(title=self.title,author=self.author)
+
+class Non_Fiction(Book):
+    def __init__(self,title,subject,level,isbn):
+        self.title=title
+        self.subject=subject
+        self.level=level
+        self.isbn=isbn
+    def get_subject(self):
+        return self.subject
+    def get_level(self):
+        return self.level
+    def __repr__(self):
+        return "{title}, a {level} manual on {subject}".format(title=self.title,level=self.level,subject=self.subject)
+
+
+class TomeRater:
+    def __init__(self):
+        self.users={}
+        self.books={}
+    def create_book(self,title,isbn):
+        self.title=title
+        self.isbn=isbn
+        return self.title, self.isbn
+    def create_novel(self,title,author,isbn):
+        self.title=title
+        self.isbn=isbn
+        self.author=author
+        return self.title,self.isbn,self.author
+    def non_fiction(self,title,subject,level,isbn):
+        self.title=title
+        self.subject=subject
+        self.level=level
+        self.isbn=isbn
+        return self.title,self.level,self.subject,self.isbn
+    def add_book_to_user(self,book,email,rating=None):
+        self.book=book
+        self.email=email
+        if self.email in self.users.keys():
+            vals=self.users[self.email]
+            read_book(vals,self.book,self.email)
+            add_rating(vals,self.rating)
+
+
+    def add_user(self,name,email,user_books=None):
+        self.name=name
+        self.user_books=user_books
+        self.email=email
+        if user_books:
+            for i in user_books:
+                add_book_to_user(i)
+    def print_catalog(self):
+        for i in self.books.keys():
+            print(i)
+    def print_users(self):
+        for i in self.users.values():
+            print(i)
+    def most_read_bokk(self):
+
+        else:
+            return 'No user with email {email}'.format(email=self.email)
+
+
+#sorry i had lost all of the original data and i had to rewrite everything in one day
